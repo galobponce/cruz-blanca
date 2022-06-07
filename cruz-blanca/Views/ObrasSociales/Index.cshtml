@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ObraSocial>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">
+    Obras Sociales
+</h1>
+<p>
+    <a asp-action="Create" class="btn btn-success">Nueva</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AsociadaConClinica)
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+        @foreach (ObraSocial obraSocial in Model)
+        {
+            <tr>
+                <td>@obraSocial.Nombre</td>
+                @if (obraSocial.AsociadaConClinica)
+                {
+                    <td>Sí</td>
+                }
+                else
+                {
+                    <td>No</td>
+                }
+                <td>
+                    <a asp-action="Edit" asp-route-id="@obraSocial.Id" class="btn btn-info">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@obraSocial.Id" class="btn btn-danger">Borrar</a>
+                </td>
+            </tr>
+        }
+    </thead>
+</table>
