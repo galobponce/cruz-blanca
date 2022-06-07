@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using cruz_blanca.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,9 +26,9 @@ namespace cruz_blanca
         public void ConfigureServices(IServiceCollection services)
         {
             string ConnectionString = "Server=localhost;User=root;Password=root123**;Database=cruz_blanca;Port=3306";
-            var ServerVersion = new MariaDbServerVersion(new Version(10, 4, 12));
+            var ServerVersion = Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.28-mysql");
 
-            services.AddDbContext<CruzBlancaDbContext>(dbContextOptions => dbContextOptions.UseMySql(ConnectionString, ServerVersion));
+            services.AddDbContext<CruzBlancaDBContext>(dbContextOptions => dbContextOptions.UseMySql(ConnectionString, ServerVersion));
 
             services.AddControllersWithViews();
         }
